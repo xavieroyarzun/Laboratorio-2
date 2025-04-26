@@ -1,0 +1,298 @@
+\documentclass[12pt]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amssymb,amsmath,amsthm,amsfonts}
+\usepackage{calc}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{gensymb}
+\usepackage{natbib}
+\usepackage{url}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage{parskip}
+\usepackage{fancyhdr}
+\usepackage{vmargin}
+\setmarginsrb{3 cm}{1.0 cm}{3 cm}{2.5 cm}{1 cm}{1.5 cm}{1 cm}{1.5 cm}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{pst-all}
+\usepackage{pstricks}
+\usepackage{listings}
+\usepackage{float}
+\usepackage{hyperref} 
+\title{Titulo del laboratorio}					% Titulo
+\author{Primer Autor \linebreak
+Segundo autor\linebreak
+\newline
+\bttext{Profesor: \linebreak Profesor de laboratorio}}
+\date{Fecha de entrega}% Fecha
+
+\makeatletter
+\let\thetitle\@title
+\let\theauthor\@author
+\let\thedate\@date
+\makeatother
+
+\pagestyle{fancy}
+\fancyhf{}
+\usepackage{subfigure}
+\usepackage{gensymb}
+\cfoot{\thepage}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{titlepage}
+	\centering
+    \vspace*{0.0 cm}
+    \includegraphics[scale = 0.5]{unnamed.png}\\[1.0 cm]	% Logo Universidad
+    \textsc{\LARGE Universidad Diego Portales}\\[0.2 cm]	% Nombre Universidad
+	\textsc{\large ESCUELA DE INFORMÁTICA \& TELECOMUNICACIONES}\\[2 cm]		% Nombre Curso
+	\textsc{\LARGE ESTRUCTURAS DE DATOS \& ANÁLISIS DE ALGORITMOS}\\[1.0 cm]	% Nombre Universidad
+	\rule{\linewidth}{0.2 mm} \\[0.4 cm]
+	{ \huge Laboratorio 2: Votación}\\
+	\rule{\linewidth}{0.2 mm} \\[1.5 cm]
+	
+	\begin{minipage}{1.0\textwidth}
+		\begin{center} \large
+			\emph{Autores:}
+            David Fuentes\\
+            Xaiver Oyarzun
+			\linebreak
+			\end{center}
+	\end{minipage}\\[1.5 cm]	
+	\large 
+ 
+	%\vfill
+	
+\end{titlepage}
+
+\pagebreak
+\tableofcontents
+\pagebreak
+
+\section{Introducción}%%%  casi listo
+En este laboratorio se llevó a cabo la recreación de un sistema para implementar un programa destinado a la realización de elecciones del presidente del Centro de Alumnos de la Escuela de Informática y Telecomunicaciones. Para ello, se desarrolló en lenguaje Java el sistema denominado ELECTO, el cual permite gestionar candidatos, votantes y resultados electorales. A continuación, se profundiza en el desarrollo y funcionamiento de este sistema.
+
+
+\section{Implementación y Pruebas }
+\subsection{Implementación}
+Para empezar esta parte se basa en el codigo que esta github en el siguente link:
+\href{https://github.com/xavieroyarzun/Laboratorio-2.git}
+En la figura \ref{fig:voto} tenemos a la clase Voto y su constructor en la cual tenemos id,votanteID, candidatoID y por último timestamp.
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.9]{VOTO.png}
+    \caption{Clase voto}
+    \label{fig:voto}
+\end{figure}
+
+\begin{itemize}
+\item id: Es una forma de identificar cual es el  valor numerico de este voto en concreto. 
+\item votanteID:La forma de identificar al votante numericamente.
+\item candidatoID: Una manera de cuantificar a cada candidato.
+\item Timestamp: Una forma de saber a que hora el votante voto.
+\end{itemize}
+Los get y set están en el github anteriormente mencionado.
+\pagebreak
+\newpage
+
+La figura \ref{fig:candidato} podemos observar la clase Candidato con su respectivo constructor 
+y un metodo, ademas tiene como atributos id,nombre,partido y una cola con objetos tipo Voto.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.8]{candidato.png}
+    \includegraphics[scale = 0.8]{metodo agregar voto.png}
+    \caption{Clase candidato }
+    \label{fig:candidato}
+\end{figure}
+\begin{itemize}
+\item id: Es una forma de identificar cual es el  valor numerico de este candidato en concreto. 
+\item nombre: Es un  string que registra los nombres de los candidatos.
+\item partido: El partido es nombre de los partidos  a registar.
+\item Queue<Voto> votosRecibidos: es una cola que acepta obejetos de tipo Voto.
+\item agregarVoto: Es un metodo que usa el atributo votosRecibidos para almacenar objetos de tipo Voto en una cola.
+
+\end{itemize}
+\pagebreak
+\newpage
+
+En figura \ref{fig:votante} se puede ver la clase votante con su constructor y un metodo, 
+incluyendo sus atributos los cuales son id, nombre y un boolean con nombre yaVoto.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.8]{votante.png}
+    \includegraphics[scale = 0.8]{marcado .png}
+    \caption{Clase Votante}
+    \label{fig:votante}
+\end{figure}
+\begin{itemize}
+\item id: Es una forma de identificar cual es el  valor numerico de este votante en concreto. 
+\item nombre: Es un  string que registra los nombres de los votantes.
+\item marcar Como votado: Es un metodo que usa boolean para retornar verdadero cuando un votante ya voto.
+
+\end{itemize}
+\pagebreak
+\newpage
+
+La figura \ref{fig:urna} muestra la clase Urna Electoral con su respectivo constructor 
+y sus varios metodos, añadiendo sus atributos que son una lista, un stack, una cola y un contador.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale = 0.7]{urna.png}
+    \caption{Clase Urna Electoral}
+    \label{fig:urna}
+\end{figure}
+\begin{itemize}
+\item Lista Candidatos: Es una lista que guarda objetos tipo candidatos  
+\item Historial Votos: Es un stack que almacena objetos tipo Voto
+\item Votos Reportados: Es una cola que conserva votos los cuales el votante ya habia votado.
+\item IDCounter: Es un contador que  aumenta en base al numero de votos registrados 
+\end{itemize}
+En este metodo usa un puntero de la clase Votante llamado votante que verifica si votante ya voto o no.
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale = 0.7]{primer veri.png}
+    \caption{Metodo verificar Votante}
+    \label{fig:veri}
+\end{figure}
+\pagebreak
+\newpage
+
+El método registrarVoto primero verifica si el votante ya ha ejercido su derecho al voto mediante la bandera yaVoto; 
+si es así, muestra un mensaje indicando que el votante ya participó y retorna false. De lo contrario, busca al candidato 
+en la lista comparando su ID. Si no lo encuentra, notifica "Candidato no encontrado" y retorna false. Si el candidato 
+existe, genera un registro de voto con un ID único, la hora actual y los datos del votante y candidato. Luego, ejecuta 
+tres acciones clave: añade el voto a la cola del candidato con agregarVoto(), lo guarda en el historial mediante push() 
+y actualiza el estado del votante con marcarComoVotado(). Finalmente, retorna true para confirmar que el voto se registró
+ correctamente.
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale = 0.6]{registar voto urna.png}
+    \caption{Metodo registrar Votante}
+    \label{fig:veri}
+\end{figure}
+\pagebreak
+\newpage
+En la primera parte tenemos queue llamado votos Candidato el cual tiene todos los votos que 
+el candidato recibio y un puntero de tipo voto igual a null para saber si el votante ya voto o no, 
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale = 0.6]{reportar voto.png}
+    \caption{Metodo reportar Voto}
+    \label{fig:veri}
+\end{figure}
+
+El método obtenerResultados utiliza un Map (Candidato, Integer)llamado resultados para almacenar los datos electorales. 
+Mediante un bucle for, recorre toda la lista de candidatos, utilizando un contador i para acceder a cada posición. 
+En cada iteración, toma el candidato actual (referenciado por c) y lo agrega al mapa como clave, mientras que su valor 
+asociado corresponde al total de votos recibidos, obtenido mediante c.getVotosRecibidos().size(). Finalmente, el método 
+retorna el mapa resultados completamente poblado, donde cada entrada contiene un candidato y su respectivo conteo de 
+votos.
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale = 0.6]{obtener resultados.png}
+    \caption{Metodo reportar Voto}
+    \label{fig:resu}
+\end{figure}
+
+\subsection{Prueba}
+La figura \ref{fig:image} muestra las pruebas realizadas por cada metodo 
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale = 0.8]{image.png}
+    \caption{pruebas}
+    \label{fig:image}
+\end{figure}
+
+
+
+
+
+
+\pagebreak
+\newpage
+\section{Analisis: Complejidad y Uso de memoria }%%% deberia estar listo (confirmame)
+\subsection{Complejidad (Big-O)}
+En esta sesión, se presenta un desglose estructurado de los métodos implementados en el sistema, 
+junto con su respectiva complejidad computacional en notación Big-O.
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|c|}
+        \hline
+        Metodos & Big-O \\ \hline
+        Registrar voto& O(n)   \\ \hline
+        obtener Resultdados & O(n)   \\ \hline
+        reportar Voto  & O(n)   \\ \hline
+        verificar voto  & O(1)   \\ \hline
+    \end{tabular}
+    \caption{Placeholder Caption}
+    \label{tab:placeholder_label}
+\end{table}
+\subsection{Uso de memoria}
+Se nos ha solicitado determinar el espacio de almacenamiento requerido para el número 
+máximo de participantes en el proceso electoral. Para ello, consideramos los siguientes datos:
+
+\begin{itemize}
+\item Numero maximo de votantes: 10.000.000
+\item Espacio ocupado por cada voto: 64 Bytes
+\end{itemize}
+Con base en esta información, se realiza el siguiente cálculo:
+
+Espacio total = número devotantes * tamaño por voto
+
+64.000.000 Bytes = 10.000.000 * 64 Bytes 
+
+O aproximadamente  0.6 GB de espacio total.
+\subsection{Propuesta de mejora}
+Se crea otro atributo en la clase Voto en el cual se guarda cuál es la facultad a la que pertenece 
+el votante de esta manera se guarda en la cola de la clase de votante. 
+
+Para mantener un registro de votos ordenados del más reciente al más antiguo, podemos utilizar un enfoque basado 
+en dos stacks (pilas) que garantice el orden deseado sin modificar la estructura original de datos.
+
+\pagebreak
+\newpage
+\section{Ventajas y desventajes }%%%listo
+En esta sesión se evaluará las ventajas y desventajas de usar listas enlazadas en vez de arreglos (stack,queue y linkedlist)
+\subsection{Ventajas }
+\subsubsection{Escalabilidad dinamica}
+No se necesita aumetar el tamaño del nodo en cambia para un stack si.
+\subsubsection{Insertar nuevos votos }
+Si se requiere insertar un voto en una posicion en especifico en un arreglo se debera mover todo el arreglo en cambio en una lista enlazada es cambiar la las "flechas" de la lista. 
+\subsection{Desventajas }
+\subsubsection{Busqueda directa }
+Si queremos buscar por la posicion un arreglo es O(1) en cambio para un lista enlazada es O(n) siendo n la cantidad de datos que hay en la lista.
+\subsubsection{Localidad de la memoria no continua  }
+Cuando se guardan cosas en un nodo en la memoria no lo hace en forma continua lo hace de manera aleatoria identicando a cada elemtento por medio de punteros.
+
+\section{conclusion y posibles extensiones } 
+
+El voto electronicos se podria implementar a este codigo de manera mas o menos sencilla aun que los numeros de votantes 
+se multiplicaria por varias ordenes de magnitud. En realidad en  cualquier caso en donde se necesite elegir a un 
+representante se podria usar este codigo aunque obviamente se tendria que modificar ciertas partes del mismo.
+
+Este laboratorio consistió en desarrollar un sistema de votaciones para elegir al presidente del centro de alumnos, 
+aplicando conceptos de estructuras de datos como colas, pilas y listas, las cuales fueron implementadas eficientemente 
+en el código. Se trabajó en mejorar la estructura de las clases y la gestión de memoria, asegurando un diseño claro y 
+organizado.  
+
+Además, se analizó la posibilidad de utilizar diferentes estructuras de datos (como listas enlazadas enfrete a arreglos ),
+ evaluando sus ventajas y desventajas. Si bien cada enfoque tiene sus particularidades, se concluyo aunque tenga ventajas
+ tambien tiene desventajas lo cual aferrase a solo utilizar listas enlazadas no tiene sentido practico; 
+la flexibilidad de elegir la más adecuada según el caso resulta más beneficiosa.  
+
+En definitiva, se cumplieron con éxito los objetivos del laboratorio, logrando un sistema funcional que simula 
+un proceso electoral real, aplicando conceptos clave de programación y estructuras de datos. El proyecto no solo 
+cumplió con los requisitos, sino que también permitió reforzar el entendimiento de estas herramientas en un contexto 
+práctico.
+
+
+
+\end{document}
